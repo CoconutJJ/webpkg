@@ -2,16 +2,35 @@
 #define registry_h
 #include "../semver/semver.h"
 #include <stdlib.h>
+
+/**
+ * ISO Time
+ */
+typedef struct {
+        int year;
+        short month;
+        short day;
+        short hour;
+        short minute;
+        short second;
+} ISOTime;
+
+/**
+ * Describes a package-version tuple
+ */
 typedef struct {
         char *name;
         SemanticVersion version;
 } PackageLabel;
 
+/**
+ * Describes a person
+ */
 typedef struct {
-        char *name;
-        char *url;
-
-} PackageAuthor;
+        char *name;  /* Person's name */
+        char *url;   /* Person's website */
+        char *email; /* Person's email */
+} Identity;
 
 typedef struct {
         PackageLabel *deps;
@@ -20,22 +39,28 @@ typedef struct {
 } PackageDeps;
 
 typedef struct {
-        SemanticVersion version;
         char *name;
-        char *description;
-        char *homepage;
-        PackageAuthor author;
-        char *license;
+        SemanticVersion version;
+        char *tarball;
 } PackageVersion;
 
 typedef struct {
         char *name;
-        char *description;
 
         PackageVersion *versions;
         size_t versions_capacity;
         size_t versions_count;
-        
+
+        ISOTime mtime;
+        ISOTime ctime;
+
+        Identity *maintainers;
+        size_t maintainers_capacity;
+        size_t maintainers_count;
+
+        char *repository;
+        char *url;
+        char *description;
 
 } Registry;
 

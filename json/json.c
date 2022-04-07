@@ -60,7 +60,7 @@ JSON_OBJECT *json_find_entry_with_obj_value (JSON_OBJECT *obj, char *key)
 
 JSON_ENTRY *json_iterate_entries (JSON_OBJECT *obj, size_t *idx)
 {
-        if (*idx == obj->count)
+        if (*idx >= obj->count)
                 return NULL;
 
         JSON_ENTRY *entry = obj->entries[*idx];
@@ -72,7 +72,7 @@ JSON_ENTRY *json_iterate_entries (JSON_OBJECT *obj, size_t *idx)
 
 JSON *json_iterate_array (JSON_ARRAY *arr, size_t *idx)
 {
-        if (*idx == arr->count)
+        if (*idx >= arr->count)
                 return NULL;
 
         JSON *item = arr->items[*idx];

@@ -33,6 +33,12 @@ void init_HTTPRequest (HTTPRequest *request, char *url)
         init_databuffer (&request->response_data);
 }
 
+void destroy_HTTPRequest (HTTPRequest *request)
+{
+        destroy_databuffer (&request->request_data);
+        destroy_databuffer (&request->response_data);
+}
+
 void *http_post (HTTPRequest *request)
 {
         CURL *curl = curl_easy_init ();
@@ -48,12 +54,11 @@ void *http_post (HTTPRequest *request)
 
         CURLcode result = curl_easy_perform (curl);
 
-
         if (result != CURLE_OK) {
                 request->error = curl_easy_strerror (result);
         }
 
-        curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &request->http_response_code);
+        curl_easy_getinfo (curl, CURLINFO_RESPONSE_CODE, &request->http_response_code);
 
         curl_easy_cleanup (curl);
 }
@@ -75,7 +80,7 @@ void *http_get (HTTPRequest *request)
         if (result != CURLE_OK) {
                 request->error = curl_easy_strerror (result);
         }
-        curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &request->http_response_code);
+        curl_easy_getinfo (curl, CURLINFO_RESPONSE_CODE, &request->http_response_code);
 
         curl_easy_cleanup (curl);
 }

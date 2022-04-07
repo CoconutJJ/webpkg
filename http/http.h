@@ -30,6 +30,7 @@ typedef struct {
 } HTTPRequest;
 
 void init_HTTPRequest (HTTPRequest *request, char *url);
+void destroy_HTTPRequest(HTTPRequest *request);
 void *http_post (HTTPRequest *request);
 void *http_get (HTTPRequest *request);
 #endif
