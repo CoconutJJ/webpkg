@@ -63,7 +63,7 @@ JSON_ENTRY *json_iterate_entries (JSON_OBJECT *obj, size_t *idx)
         if (*idx == obj->count)
                 return NULL;
 
-        JSON_ENTRY *entry = obj->entries[*idx]
+        JSON_ENTRY *entry = obj->entries[*idx];
 
         (*idx)++;
 
