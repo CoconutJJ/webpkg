@@ -1,31 +1,8 @@
 #include "datarwbuffer.h"
+#include "../memory/memory.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
-static void *allocate (size_t size)
-{
-        void *mem = malloc (size);
-
-        if (!mem) {
-                perror ("malloc");
-                exit (EXIT_FAILURE);
-        }
-
-        return mem;
-}
-
-static void *reallocate (void *ptr, size_t new_size)
-{
-        ptr = realloc (ptr, new_size);
-
-        if (!ptr) {
-                perror ("realloc");
-                exit (EXIT_FAILURE);
-        }
-
-        return ptr;
-}
 
 void init_databuffer (DataRWBuffer *buffer)
 {

@@ -1,5 +1,5 @@
 #include "parser.h"
-#include "mem.h"
+#include "../memory/memory.h"
 #include "scanner.h"
 #include <stdbool.h>
 #include <stdio.h>

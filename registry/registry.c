@@ -2,6 +2,7 @@
 #include "../arrays/array.h"
 #include "../http/http.h"
 #include "../json/json.h"
+#include "../memory/memory.h"
 #include <stdlib.h>
 #include <string.h>
 
@@ -20,12 +21,7 @@ char *construct_package_registry_url (char *package_name)
         int registry_len = strlen (registry_endpoint);
         int url_buf_len = strlen (package_name) + strlen (registry_endpoint) + 2;
 
-        char *pkg_url = malloc (url_buf_len);
-
-        if (!pkg_url) {
-                perror ("malloc");
-                exit (EXIT_FAILURE);
-        }
+        char *pkg_url = allocate (url_buf_len);
 
         pkg_url[0] = '\0';
 
@@ -83,8 +79,8 @@ bool parse_registry_version_json (PackageVersion *buffer, JSON_ENTRY *version)
 
 /**
  * Parses the redirect JSON object returned by a registry GET request.
- * 
- * Returns a shallow copy to the `location` JSON property url.  
+ *
+ * Returns a shallow copy to the `location` JSON property url.
  * @param payload JSON payload
  * @return location URL
  */
@@ -113,13 +109,13 @@ const char *parse_redirect_payload (char *payload)
 
 /**
  * Makes a GET request to the registry for the specified `package_name`.
- * 
+ *
  * Returns the request handler.
- * 
+ *
  * request.url field will always be set to null for handlers returned from this
- * function.  
- * 
- * @param package_name name of the package 
+ * function.
+ *
+ * @param package_name name of the package
  * @return HTTPRequest request handler
  */
 HTTPRequest package_http_request (char *package_name)
@@ -146,11 +142,7 @@ char *fetch_package_registry_data (char *package_name)
                         init_HTTPRequest (&request, url);
                         http_get (&request);
                 } else {
-                        char *data = malloc (request.response_data.count + 1);
-                        if (!data) {
-                                perror ("malloc");
-                                exit (EXIT_FAILURE);
-                        }
+                        char *data = allocate (request.response_data.count + 1);
 
                         memcpy (data, request.response_data.data, request.response_data.count);
                         destroy_HTTPRequest (&request);

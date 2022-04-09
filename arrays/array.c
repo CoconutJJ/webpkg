@@ -1,5 +1,5 @@
+#include "../memory/memory.h"
 #include <stdlib.h>
-
 void *resize_array (void *array, size_t membsize, size_t nmemb, size_t *membcapacity)
 {
         size_t capacity = *membcapacity;
@@ -11,12 +11,7 @@ void *resize_array (void *array, size_t membsize, size_t nmemb, size_t *membcapa
         else if (nmemb < capacity / 4)
                 capacity /= 2;
 
-        array = realloc (array, capacity * membsize);
-        
-        if (!array) {
-                perror ("realloc");
-                exit (EXIT_FAILURE);
-        }
+        array = reallocate (array, capacity * membsize);
 
         *membcapacity = capacity;
 

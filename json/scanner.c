@@ -1,5 +1,5 @@
 #include "scanner.h"
-#include "mem.h"
+#include "../memory/memory.h"
 #include <stdarg.h>
 #include <stdbool.h>
 #include <stdio.h>

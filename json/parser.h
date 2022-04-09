@@ -2,16 +2,15 @@
 #define parser_h
 #include <stdlib.h>
 
-
-#define JSONPTR_IS_OBJECT(ptr) (((JSON*)(ptr))->type == OBJECT)
-#define JSONPTR_IS_ARRAY(ptr) (((JSON*)(ptr))->type == ARRAY)
-#define JSONPTR_IS_ITEM(ptr) (((JSON*)(ptr))->type == ITEM)
-#define JSONITEMPTR_IS_STRING(ptr) (((JSON_ITEM*)ptr)->item_type == JSON_TYPESTRING)
-#define AS_JSON(json)        ((JSON *)(json))
-#define AS_JSON_ITEM(json)   ((JSON_ITEM *)(json))
-#define AS_JSON_OBJECT(json) ((JSON_OBJECT *)(json))
-#define AS_JSON_ARRAY(json)  ((JSON_ARRAY *)(json))
-#define AS_JSON_ENTRY(json)  ((JSON_ENTRY *)(json))
+#define JSONPTR_IS_OBJECT(ptr)     (((JSON *)(ptr))->type == OBJECT)
+#define JSONPTR_IS_ARRAY(ptr)      (((JSON *)(ptr))->type == ARRAY)
+#define JSONPTR_IS_ITEM(ptr)       (((JSON *)(ptr))->type == ITEM)
+#define JSONITEMPTR_IS_STRING(ptr) (((JSON_ITEM *)ptr)->item_type == JSON_TYPESTRING)
+#define AS_JSON(json)              ((JSON *)(json))
+#define AS_JSON_ITEM(json)         ((JSON_ITEM *)(json))
+#define AS_JSON_OBJECT(json)       ((JSON_OBJECT *)(json))
+#define AS_JSON_ARRAY(json)        ((JSON_ARRAY *)(json))
+#define AS_JSON_ENTRY(json)        ((JSON_ENTRY *)(json))
 
 typedef enum { ITEM, OBJECT, ARRAY, ENTRY } JSON_OBJTYPE;
 
